@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="styless.css">
+<style>
+header, footer {
+    padding: 1em;
+    color: black;
+    clear: left;
+    text-align: center;
+}
+
+div {
+ text-align: center;
+padding-bottom: 30px;
+}
+
+img {
+padding-bottom: 30px;
+}
+
+form{
+padding: 1em;
+    color: black;
+    clear: left;
+    text-align: center;
+}
+
+input{
+    background: #fff;
+    border: 2px solid #d8d0d0;
+    border-radius: 4px;
+    color: #333;
+    height: 50px;
+    width: 1000px;
+    font-weight: 600;
+    align: center;
+}
+
+button {
+    background-color: #e7e7e7;    
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    color: black;
+    overflow: hidden;
+    outline:none;
+    font-size: 24px;
+    text-align: center;
+    padding: 15px 32px;
+}
+</style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type='text/javascript'>
+       function goTo(x) {
+            var myVideo = document.getElementById("video1");
+            myVideo.currentTime = x;
+        }
+       
+       var oldPos = 0;
+       var items = ["Felix", "Cam", "Cam", "Cam", "Cam", "Cam"];
+       var index = [0,1,2,3,4,900];
+
+       function nextPosRev(x){
+       for (i = oldPos; i >= 0; i = i - 1){
+                  if (x == items[i] && i != oldPos){
+                        oldPos = i;
+                        return goTo(index[oldPos]);
+                  }
+             }
+       }
+
+       function nextPosFor(x){
+       for (i = oldPos; i < items.length; i++){
+                  if (x == items[i]&& i != oldPos){
+                          oldPos = i;
+                          return goTo(index[oldPos]);
+                  }
+             }
+
+d3.json("transcription.json", function(data) {
+  console.log(data[0]);
+});
+
+}
+</script>
+
+<head>
+<title>Page Title</title>
+</head>
+<body background="bg1.png">
+
+<form>
+<img src = "lionscribe.png">
+</form>
+
+<div style="text-align:center"> 
+<video width:"1920" height:"720" id="video1" controls="controls" autoplay>
+<source src="http://personal.psu.edu/tpm5183/HACKPSU/19. Dynamic Programming I Fibonacci Shortest Paths.mp4" type="video/mp4"/>
+</video>
+</div>
+
+<div>
+<input name="texturl" type="text" class="textbox" id="texturl" placeholder="What topic are you interested in?" title="" value="">
+<button id="PREV"  onclick="nextPosRev(document.getElementById('texturl').value)"> PREV </button>
+<button id="NEXT" onclick="nextPosFor(document.getElementById('texturl').value)"> NEXT </button>
+</div>
+
+
+</body>
+</html>
